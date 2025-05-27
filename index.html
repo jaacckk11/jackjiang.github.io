@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最後裝甲：勝者為王 - 活動提案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/2.29.3/umd/date-fns.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Visualization & Content Choices: 
+        - Event Overview & Details: Text summaries from PDF. Goal: Inform. Method: Structured HTML. Interaction: Navigation. Justification: Clear, direct information.
+        - Competition Rules: Detailed text, possibly in accordions. Goal: Inform. Method: Structured HTML. Interaction: Click to expand/collapse. Justification: Saves space, allows focused reading.
+        - Schedule: Timeline format. Goal: Inform. Method: Styled HTML list/table. Interaction: Scroll. Justification: Chronological clarity.
+        - Budget: Pie chart for major categories, summary text. Goal: Inform, Persuade (sponsors). Method: Chart.js Canvas. Interaction: Hover for tooltips. Justification: Visual breakdown of financial needs.
+        - Gantt Chart: Horizontal bar chart. Goal: Inform. Method: Chart.js Canvas. Interaction: Hover for tooltips. Justification: Visual project plan.
+        - Sponsorship Benefits: Bulleted list. Goal: Persuade. Method: Structured HTML. Justification: Clear value proposition.
+        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #FFF7F0; /* Warm Peach Lightest */
+            color: #4A4A4A; /* Dark Gray for text */
+        }
+        .nav-active {
+            border-bottom: 2px solid #8FBC8F; /* Sage Green */
+            color: #8FBC8F; /* Sage Green */
+            font-weight: 500;
+        }
+        .nav-item {
+            transition: all 0.3s ease;
+        }
+        .nav-item:hover {
+            color: #8FBC8F; /* Sage Green */
+        }
+        .section-title {
+            color: #D2691E; /* Burnt Sienna - accent */
+            border-bottom: 2px solid #FFDAB9; /* Peach Puff - lighter accent */
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-left: 5px solid #8FBC8F; /* Sage Green */
+        }
+        .btn-primary {
+            background-color: #8FBC8F; /* Sage Green */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #70a870; /* Darker Sage Green */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px; /* Max height */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px; /* Taller on md screens */
+            }
+        }
+        @media (min-width: 1024px) {
+            .chart-container {
+                height: 400px; /* Taller on lg screens */
+            }
+        }
+        .tab-button {
+            background-color: #FFEFDB; /* Lighter Peach */
+            color: #D2691E; /* Burnt Sienna */
+        }
+        .tab-button.active {
+            background-color: #8FBC8F; /* Sage Green */
+            color: white;
+        }
+        .rule-content { display: none; }
+        .rule-content.active { display: block; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-md shadow-md fixed w-full z-50 top-0">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-d2691e">最後裝甲：勝者為王</a>
+            <div class="hidden md:flex space-x-4">
+                <a href="#overview" class="nav-item px-3 py-2 rounded-md text-sm">活動總覽</a>
+                <a href="#details" class="nav-item px-3 py-2 rounded-md text-sm">活動詳情</a>
+                <a href="#rules" class="nav-item px-3 py-2 rounded-md text-sm">賽事規則</a>
+                <a href="#schedule" class="nav-item px-3 py-2 rounded-md text-sm">活動流程</a>
+                <a href="#sponsorship" class="nav-item px-3 py-2 rounded-md text-sm">贊助效益</a>
+                <a href="#budget" class="nav-item px-3 py-2 rounded-md text-sm">經費預算</a>
+                <a href="#timeline" class="nav-item px-3 py-2 rounded-md text-sm">活動時程</a>
+                <a href="#contact" class="nav-item px-3 py-2 rounded-md text-sm">聯絡我們</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="#overview" class="block nav-item px-4 py-2 text-sm hover:bg-gray-100">活動總覽</a>
+            <a href="#details" class="block nav-item px-4 py-2 text-sm hover:bg-gray-100">活動詳情</a>
+            <a href="#rules" class="block nav-item px-4 py-2 text-sm hover:bg-gray-100">賽事規則</a>
+            <a href="#schedule" class="block nav-item px-4 py-2 text-sm hover:bg-gray-100">活動流程</a>
+            <a href="#sponsorship" class="block nav-item px-4 py-2 text-sm hover:bg-gray-100">贊助效益</a>
+            <a href="#budget" class="block nav-item px-4 py-2 text-sm hover:bg-gray-100">經費預算</a>
+            <a href="#timeline" class="block nav-item px-4 py-2 text-sm hover:bg-gray-100">活動時程</a>
+            <a href="#contact" class="block nav-item px-4 py-2 text-sm hover:bg-gray-100">聯絡我們</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 pt-24 pb-12">
+
+        <section id="overview" class="py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold section-title inline-block px-4 pb-2">最後裝甲：勝者為王</h1>
+                <p class="text-xl mt-4 text-gray-700">一場結合創意、技術與團隊合作的坦克設計實作競賽！</p>
+                <p id="event-date-location" class="text-lg mt-2 text-gray-600">日期：114年11月8日 (星期六) | 地點：國立彰化師範大學 寶山校區</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-2xl font-semibold text-d2691e mb-4">活動簡介</h2>
+                    <p class="mb-4 text-gray-700 leading-relaxed">本活動旨在透過創意坦克設計與實作競賽，激發學生的創新思維、工程應用與團隊合作能力。我們鼓勵參與者在設計與製作坦克的過程中，學習跨領域整合、問題解決，並強調安全駕駛與環保永續的理念。這不僅是一場充滿挑戰與樂趣的競技活動，更是培養未來工程人才的搖籃。</p>
+                    <p class="text-gray-700 leading-relaxed">「最後裝甲：勝者為王」將為校園注入活力，提供學生展現創意與技術的舞台，並促進校內外交流。我們期待透過此活動，讓參與者在實踐中學習，在競爭中成長。</p>
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-xl">
+                    <img src="https://placehold.co/600x400/FFDAB9/D2691E?text=坦克競賽示意圖" alt="活動示意圖" class="w-full h-auto object-cover">
+                </div>
+            </div>
+        </section>
+
+        <section id="details" class="py-12 bg-white rounded-lg shadow-lg my-8 p-8">
+            <h2 class="text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">活動詳情</h2>
+            <p class="mb-6 text-gray-700 leading-relaxed">本節將詳細介紹「最後裝甲：勝者為王」活動的宗旨與目標，讓您更深入了解活動的核心價值以及我們期望達成的成果。透過此活動，我們希望能為參與學生提供一個獨特的學習與成長機會。</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-d2691e mb-3">活動宗旨</h3>
+                    <p class="text-gray-700 leading-relaxed">透過競賽激發學生的創新思維與實作能力，讓參與者在設計與製作坦克車的過程中，培養工程應用與跨領域整合的能力。同時，比賽採團隊合作模式，讓學生學習分工協作與問題解決，提升團隊合作精神。此外，活動強調安全駕駛觀念，並融入環保與永續發展概念，推廣負責任的創新精神。</p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-d2691e mb-3">活動目標</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 leading-relaxed">
+                        <li>提供學生動手實作機會，激發創新思維。</li>
+                        <li>增進團隊合作與問題解決能力。</li>
+                        <li>提升安全駕駛意識，強調正確的車輛操作與風險管理。</li>
+                        <li>創造校園特色活動，增進校內外交流與學術互動。</li>
+                        <li>培養學生對機械設計、材料運用與動力學的實務理解。</li>
+                        <li>推廣環保與永續發展概念。</li>
+                        <li>提供企業與學生交流平台，促進未來實習與就業機會。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="rules" class="py-12">
+            <h2 class="text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">賽事規則</h2>
+            <p class="mb-6 text-gray-700 leading-relaxed">「最後裝甲：勝者為王」分為「結構組」與「寶寶組」兩大賽事。本區塊將詳細說明各組別的車輛設計規範、安全規定及評分標準，請參賽隊伍務必詳閱，以確保符合參賽資格並充分準備。</p>
+            <div class="mb-6 flex justify-center space-x-4">
+                <button class="tab-button py-2 px-4 rounded-md font-medium active" data-tab="structure">結構組規則</button>
+                <button class="tab-button py-2 px-4 rounded-md font-medium" data-tab="baby">寶寶組規則</button>
+            </div>
+
+            <div id="structure-rules" class="rule-content active card p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold text-d2691e mb-4">結構組坦克車設計規定</h3>
+                <p class="mb-4 text-gray-600">本組別旨在讓參賽者自行設計及製作手動驅動坦克車，進行團體射擊賽，強調創意、團隊合作、安全意識與工程實作能力。</p>
+                <div class="space-y-3 text-gray-700">
+                    <p><strong>車輛規格：</strong>容納2-3名隊員，長≤3m、寬≤2.5m、高≤3m。車底離地≥20cm。淨重≤80kg (不含人員)。輪胎≥8英寸 (腳踏車輪、手推車充氣輪等)。允許使用腳踏車框架。砲孔洞限制: 15cm x 15cm。</p>
+                    <p><strong>動力來源：</strong>僅限人力驅動 (腳踏、手搖、槓桿滑動、滑步式等)。禁止馬達、電動、燃料動力。</p>
+                    <p><strong>安全規範：</strong>基本結構安全，無尖銳物。需防護框架/外罩 (木板、PVC管等)。建議安全帶/固定裝置。禁改裝現有車輛。</p>
+                    <p><strong>方向控制：</strong>必須配備，手動操作，不得以手/腳接觸地面轉向，至少作用於兩輪。</p>
+                    <p><strong>剎車系統 (加分項目)：</strong>若有設計且有效，可加分 (不強制)。不得以手接觸地面剎車，至少作用於兩輪。</p>
+                    <p><strong>隊伍規定：</strong>每隊2-3人。需繳交設計草圖與初步安全檢測報告。</p>
+                    <p><strong>安全規定：</strong>需配戴全罩安全帽(自備)、長袖長褲、防摔手套、護膝、護肘、護目鏡 (部分可租借)。禁惡意衝撞。</p>
+                    <p><strong>評分標準：</strong>創意設計(20%)、安全性(10%, 剎車+5%)、製作難度(10%)、團隊合作(20%)、團抗賽表現(40%)、團體風格加分(最高20分)。</p>
+                </div>
+            </div>
+
+            <div id="baby-rules" class="rule-content card p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold text-d2691e mb-4">寶寶組坦克車設計規定</h3>
+                <p class="mb-4 text-gray-600">本組別旨在讓參賽者利用大會提供材料現場製作簡易紙箱坦克車，進行趣味團體射擊賽，強調創意與團隊合作。</p>
+                <div class="space-y-3 text-gray-700">
+                    <p><strong>車輛規格：</strong>每車2名隊員 (推車手與砲手)。長≤1.5m、寬≤1.5m、高≤2m。孔洞限制: 10cm x 10cm。</p>
+                    <p><strong>製作地點：</strong>活動現場製作 (預計1.5小時)。主辦單位提供坦克基底手推車及定量紙箱、紙板、美工刀、膠帶。</p>
+                    <p><strong>動力來源：</strong>僅限人力驅動 (推車手推動)。禁止奔跑。</p>
+                    <p><strong>安全規範：</strong>基本結構安全，無尖銳物。推車手需緊握扶手，禁危險動作 (拳打、腳踢、衝撞等)。</p>
+                    <p><strong>隊伍規定：</strong>每隊2人。現場製作完成後需進行設計口頭報告。</p>
+                    <p><strong>安全規定：</strong>需穿著長袖長褲、防摔手套、護膝、護肘、護目鏡、安全帽 (部分可租借)。禁惡意衝撞。</p>
+                    <p><strong>評分標準：</strong>創意設計(20%)、安全性(10%)、製作難度(10%)、團隊合作(20%)、團抗賽表現(40%)、團體風格加分(最高20分)。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule" class="py-12 bg-white rounded-lg shadow-lg my-8 p-8">
+            <h2 class="text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">活動流程</h2>
+            <p class="mb-6 text-gray-700 leading-relaxed">以下為「最後裝甲：勝者為王」活動當日的概要流程。我們將確保活動緊湊而精彩，讓每位參與者都能充分享受其中。</p>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">時段</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">主要活動</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr><td class="px-6 py-4 whitespace-nowrap">08:00 - 09:20</td><td class="px-6 py-4 whitespace-nowrap">報到 & 車輛檢查</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap">09:20 - 09:50</td><td class="px-6 py-4 whitespace-nowrap">開幕典禮 & 安全宣誓</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap">09:50 - 10:30</td><td class="px-6 py-4 whitespace-nowrap">賽前準備 (結構組整備/寶寶組製作)</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap">10:30 - 12:00</td><td class="px-6 py-4 whitespace-nowrap">結構組預賽 & 敗部賽</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap">12:00 - 13:00</td><td class="px-6 py-4 whitespace-nowrap">午休 & 贊助商時間</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap">13:00 - 13:30</td><td class="px-6 py-4 whitespace-nowrap">寶寶組預賽</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap">13:30 - 16:20</td><td class="px-6 py-4 whitespace-nowrap">各組晉級賽 & 準決賽 (含摸彩與贊助商時間)</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap">16:25 - 18:00</td><td class="px-6 py-4 whitespace-nowrap">結構組 & 寶寶組決賽 (含摸彩)</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap">18:00 - 18:45</td><td class="px-6 py-4 whitespace-nowrap">頒獎典禮 & 大合照</td></tr>
+                        <tr><td class="px-6 py-4 whitespace-nowrap">18:45 - 20:00</td><td class="px-6 py-4 whitespace-nowrap">環境整理 & 活動結束</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="sponsorship" class="py-12">
+            <h2 class="text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">贊助效益與價值</h2>
+            <p class="mb-6 text-gray-700 leading-relaxed">您的贊助將為「最後裝甲：勝者為王」活動注入關鍵動力，同時也能為貴公司帶來多方面的效益。我們誠摯邀請您成為我們的合作夥伴，共同支持學生的創新與實踐精神。</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-d2691e mb-2">品牌曝光與形象提升</h3>
+                    <p class="text-gray-700 text-sm">活動期間，貴公司品牌將於宣傳品、活動場地顯著曝光，提升在青年族群中的正面形象。</p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-d2691e mb-2">精準觸及目標客群</h3>
+                    <p class="text-gray-700 text-sm">直接接觸充滿活力的大學生，他們是未來的工程師、設計師及消費者。</p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-d2691e mb-2">媒體宣傳與社群擴散</h3>
+                    <p class="text-gray-700 text-sm">透過校園媒體及社群平台廣泛宣傳，精彩活動內容易於引發分享，擴大能見度。</p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-d2691e mb-2">產學合作與人才招募</h3>
+                    <p class="text-gray-700 text-sm">提供企業與學生交流平台，發掘潛力人才，促進未來實習與就業機會。</p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-d2691e mb-2">企業社會責任 (CSR)</h3>
+                    <p class="text-gray-700 text-sm">支持教育創新與學生實踐活動，是企業回饋社會、實踐社會責任的良好途徑。</p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-d2691e mb-2">多元贊助方案</h3>
+                    <p class="text-gray-700 text-sm">我們提供冠名、黃金、白銀、物資贊助等多樣化方案，可依貴公司需求客製調整。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="budget" class="py-12 bg-white rounded-lg shadow-lg my-8 p-8">
+            <h2 class="text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">經費預算概覽</h2>
+            <p class="mb-6 text-gray-700 leading-relaxed">本活動總預算約為新台幣 517,060 元。您的支持對於活動的順利舉行至關重要。以下為主要經費項目佔比圖，詳細經費規劃請參考完整企劃書。我們將確保所有贊助款項都用在刀口上，最大化活動效益。</p>
+            <div class="chart-container">
+                <canvas id="budgetChart"></canvas>
+            </div>
+            <p class="text-center mt-4 text-sm text-gray-600">主要經費項目包含：場地與設施建置、器材租借、獎項與補助、印刷宣傳、餐飲保險、人事費用等。</p>
+        </section>
+
+        <section id="timeline" class="py-12">
+            <h2 class="text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">活動籌備時程</h2>
+            <p class="mb-6 text-gray-700 leading-relaxed">「最後裝甲：勝者為王」活動的籌備工作已如火如荼地展開。以下甘特圖呈現了從初步策劃至活動執行的各階段重要里程碑與時程規劃，確保活動能順利圓滿地進行。</p>
+            <div class="chart-container h-[500px] md:h-[600px]">
+                <canvas id="ganttChart"></canvas>
+            </div>
+        </section>
+
+        <section id="contact" class="py-12 bg-white rounded-lg shadow-lg my-8 p-8">
+            <h2 class="text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">聯絡我們，共創雙贏</h2>
+            <p class="mb-6 text-gray-700 leading-relaxed">感謝您撥冗了解「最後裝甲：勝者為王」活動。若您對活動有任何疑問，或有意願成為我們的贊助夥伴，請隨時透過以下方式與我們聯繫。我們期待與您攜手合作，共同打造一場精彩難忘的校園盛事！</p>
+            <div class="text-center">
+                <p class="text-lg text-gray-800"><strong>主辦單位：</strong>國立彰化師範大學 電機與機械科技學系</p>
+                <p class="text-lg text-gray-800 mt-2"><strong>贊助洽談負責人：</strong>翁睿孜</p>
+                <p class="text-lg text-gray-800 mt-2"><strong>活動總召：</strong>蔣政憲</p>
+                <p class="text-lg text-gray-800 mt-2"><strong>聯絡信箱：</strong><a href="mailto:jackjiang1031@gmail.com" class="text-blue-600 hover:underline">jackjiang1031@gmail.com</a></p>
+                <a href="mailto:jackjiang1031@gmail.com?subject=關於「最後裝甲：勝者為王」活動贊助" class="mt-6 inline-block btn-primary font-medium py-3 px-6 rounded-lg shadow-md">
+                    立即洽詢贊助
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <p>&copy; 114年 (2025) 國立彰化師範大學 電機與機械科技學系 版權所有</p>
+        <p class="text-sm mt-1">「最後裝甲：勝者為王」活動籌備團隊</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                mobileMenu.classList.add('hidden'); // Close mobile menu on click
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 80; // Adjust for fixed nav
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                    // Update active nav item
+                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('nav-active'));
+                    if (!this.classList.contains('block')) { // only for desktop nav items
+                         this.classList.add('nav-active');
+                    }
+                }
+            });
+        });
+        
+        // Active nav on scroll
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item:not(.block)'); // Exclude mobile nav items for this logic
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 90) { // Adjusted offset
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('nav-active');
+                if (item.getAttribute('href').substring(1) === current) {
+                    item.classList.add('nav-active');
+                }
+            });
+        });
+
+
+        // Tab functionality for rules
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const ruleContents = document.querySelectorAll('.rule-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tab = button.dataset.tab;
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                ruleContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tab}-rules`) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Budget Chart
+        const budgetData = {
+            labels: ['場地與設施 (車棚/市集/舞台)', '器材 (音響/攝影/道具)', '獎項與補助 (獎金/設計補助)', '印刷與文宣', '餐飲與保險', '人事 (工讀/評審/救護)', '雜支與其他'],
+            datasets: [{
+                label: '經費比例',
+                data: [
+                    (38400 + 14400 + 20000 + 8500 + 10000 + 5000), // 車棚 + 市集 + 大布幕框架 + 音響通訊 + 發電機 + 場佈道具 = 96300
+                    (6000 + 4800 + 4000 + 500 + 500 + 4700), // 攝影器材 + 無線電 + 比賽道具 + 發令槍 + 發令槍子彈 + 塑膠拒馬 = 20500
+                    (15000 + 20000 + 3000 + 9000), // 獎項經費 + 設計車輛補助 + 彰師大生獎勵 + 摸彩獎項 = 47000
+                    (30000 + 25000 + 12000 + 5500), // 印刷費 + 文宣費 + 活動設計費 + 帆布設計費 = 72500
+                    (20400 + 30000 + 10000), // 參加者保險 + 餐費 + 雨衣 = 60400
+                    (8360 + 9000 + 20000 + 41800 + 5000), // 攝影人員 + 評審出席費 + 救護車與急救人員 + 工讀生薪資 + 評估人員 = 84160
+                    (6000 + 40000 + 1200 + 1000 + 60000 + 5500 + 2000 + 4500 + 20000) // 清潔費 + 流動廁所 + 反光衣 + 交管棒 + 手推車 + 安全護具 + 軟球 + 闖關活動道具 + 雜支 = 140200
+                ], // Approximate distribution based on PDF figures. Total 517060
+                backgroundColor: [
+                    '#FFADAD', // Light Red
+                    '#FFD6A5', // Light Orange
+                    '#FDFFB6', // Light Yellow
+                    '#CAFFBF', // Light Green
+                    '#9BF6FF', // Light Blue
+                    '#A0C4FF', // Light Indigo
+                    '#BDB2FF', // Light Purple
+                ],
+                borderColor: '#FFF7F0',
+                borderWidth: 2
+            }]
+        };
+        const budgetConfig = {
+            type: 'pie',
+            data: budgetData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: '#4A4A4A',
+                            font: { size: 10 }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: '主要經費項目佔比',
+                        color: '#D2691E',
+                        font: { size: 16 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((context.raw / total) * 100).toFixed(1) + '%';
+                                    label += percentage + ' (NT$' + context.raw.toLocaleString() + ')';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        new Chart(
+            document.getElementById('budgetChart'),
+            budgetConfig
+        );
+
+        // Gantt Chart
+        const ganttData = {
+            labels: [
+                '制定規則與安全措施', '籌備計畫成立', '贊助洽談', 
+                '宣傳計畫、報名推廣', '場地確定與器材租借', '車輛設計規劃', 
+                '隊伍企劃篩選、修正', '車輛製作與初步測試', '試車與最終檢測', 
+                '安全設備檢查', '活動前場佈與活動後環境整理'
+            ],
+            datasets: [{
+                label: '策劃與籌備',
+                data: [
+                    {x: [new Date('2025-04-01').getTime(), new Date('2025-05-15').getTime()], y: '制定規則與安全措施'},
+                    {x: [new Date('2025-04-15').getTime(), new Date('2025-05-20').getTime()], y: '籌備計畫成立'},
+                    {x: [new Date('2025-05-01').getTime(), new Date('2025-09-30').getTime()], y: '贊助洽談'},
+                    {x: [new Date('2025-05-15').getTime(), new Date('2025-09-15').getTime()], y: '宣傳計畫、報名推廣'},
+                ],
+                backgroundColor: '#FFADAD', // Light Red
+            }, {
+                label: '場地與器材安排',
+                data: [
+                     {x: [new Date('2025-06-01').getTime(), new Date('2025-07-15').getTime()], y: '場地確定與器材租借'},
+                ],
+                backgroundColor: '#FFD6A5', // Light Orange
+            }, {
+                label: '車輛設計與製作',
+                data: [
+                    {x: [new Date('2025-06-10').getTime(), new Date('2025-07-01').getTime()], y: '車輛設計規劃'},
+                    {x: [new Date('2025-06-20').getTime(), new Date('2025-07-10').getTime()], y: '隊伍企劃篩選、修正'},
+                    {x: [new Date('2025-07-01').getTime(), new Date('2025-10-01').getTime()], y: '車輛製作與初步測試'},
+                ],
+                backgroundColor: '#CAFFBF', // Light Green
+            }, {
+                label: '演練與安全檢查',
+                data: [
+                    {x: [new Date('2025-09-15').getTime(), new Date('2025-10-15').getTime()], y: '試車與最終檢測'},
+                    {x: [new Date('2025-10-01').getTime(), new Date('2025-10-20').getTime()], y: '安全設備檢查'},
+                ],
+                backgroundColor: '#9BF6FF', // Light Blue
+            }, {
+                label: '活動執行',
+                data: [
+                    {x: [new Date('2025-10-25').getTime(), new Date('2025-11-08').getTime()], y: '活動前場佈與活動後環境整理'},
+                ],
+                backgroundColor: '#A0C4FF', // Light Indigo
+            }]
+        };
+
+        const ganttConfig = {
+            type: 'bar',
+            data: ganttData,
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'month',
+                            tooltipFormat: 'yyyy MMM', 
+                             displayFormats: {
+                                month: 'yyyy MMM' 
+                            }
+                        },
+                        min: new Date('2025-03-15').getTime(),
+                        max: new Date('2025-11-15').getTime(),
+                        ticks: { color: '#4A4A4A', font: {size: 10}},
+                        grid: { color: '#E0E0E0' }
+                    },
+                    y: {
+                        ticks: { color: '#4A4A4A', font: {size: 10}},
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#4A4A4A',
+                            font: { size: 10 }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: '活動籌備甘特圖 (示意)',
+                        color: '#D2691E',
+                        font: { size: 16 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const item = context.dataset.data[context.dataIndex];
+                                const startDate = new Date(item.x[0]).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric' }); 
+                                const endDate = new Date(item.x[1]).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric' }); 
+                                return `${context.dataset.label}: ${startDate} - ${endDate}`;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        new Chart(
+            document.getElementById('ganttChart'),
+            ganttConfig
+        );
+
+    </script>
+</body>
+</html>
