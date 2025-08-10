@@ -109,6 +109,15 @@
         }
         .rule-content { display: none; }
         .rule-content.active { display: block; }
+
+        /* --- 廣告彈窗樣式 --- */
+        .popup-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .popup-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -511,6 +520,16 @@
         </section>
     </div>
 
+    <!-- 廣告彈窗 -->
+    <div id="popup-ad" class="popup-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 popup-hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto relative">
+            <button id="close-popup-btn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            <a href="#" target="_blank" rel="noopener noreferrer">
+                <img src="https://placehold.co/600x400/8FBC8F/FFFFFF?text=您的廣告" alt="廣告" class="rounded-lg w-full h-auto">
+            </a>
+        </div>
+    </div>
+
     <footer class="bg-gray-800 text-white py-8 text-center">
         <p>&copy; 114年 (2025) 國立彰化師範大學 電機與機械科技學系 版權所有</p>
         <p class="text-sm mt-1">「最後裝甲：勝者為王」活動籌備團隊</p>
@@ -597,6 +616,30 @@
             } else {
                 console.error('Chart.js is not loaded');
             }
+
+            // --- Popup Ad Logic ---
+            const popup = document.getElementById('popup-ad');
+            const closeBtn = document.getElementById('close-popup-btn');
+
+            const showPopup = () => {
+                popup.classList.remove('popup-hidden');
+            };
+
+            const hidePopup = () => {
+                popup.classList.add('popup-hidden');
+            };
+
+            // Show popup after 2 seconds
+            setTimeout(showPopup, 2000);
+
+            // Hide popup on close button click
+            closeBtn.addEventListener('click', hidePopup);
+            // Hide popup on overlay click
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    hidePopup();
+                }
+            });
         });
     </script>
 </body>
