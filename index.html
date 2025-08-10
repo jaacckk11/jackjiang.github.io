@@ -113,6 +113,16 @@
 </head>
 <body class="antialiased">
 
+    <!-- 左側邊欄廣告 -->
+    <aside class="hidden xl:block fixed top-1/2 left-4 transform -translate-y-1/2 z-40 w-40 h-3/4 bg-white p-2 rounded-lg shadow-lg">
+        <video src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-md"></video>
+    </aside>
+
+    <!-- 右側邊欄廣告 -->
+    <aside class="hidden xl:block fixed top-1/2 right-4 transform -translate-y-1/2 z-40 w-40 h-3/4 bg-white p-2 rounded-lg shadow-lg">
+        <video src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-md"></video>
+    </aside>
+
     <nav class="bg-white/80 backdrop-blur-md shadow-md fixed w-full z-50 top-0">
         <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2 sm:space-x-3">
@@ -124,16 +134,18 @@
                 </svg>
                 <span class="text-lg sm:text-xl font-bold text-d2691e">最後裝甲：勝者為王</span>
             </a>
-            <div class="hidden lg:flex space-x-4">
+            <div class="hidden lg:flex flex-wrap space-x-2">
                 <a href="#overview" class="nav-item px-3 py-2 rounded-md text-sm">活動總覽</a>
                 <a href="#details" class="nav-item px-3 py-2 rounded-md text-sm">活動詳情</a>
                 <a href="#rules" class="nav-item px-3 py-2 rounded-md text-sm">賽事規則</a>
+                <a href="#videos" class="nav-item px-3 py-2 rounded-md text-sm">活動影片</a>
                 <a href="#market" class="nav-item px-3 py-2 rounded-md text-sm">周邊市集</a>
                 <a href="#schedule" class="nav-item px-3 py-2 rounded-md text-sm">活動流程</a>
                 <a href="#sponsorship" class="nav-item px-3 py-2 rounded-md text-sm">贊助效益</a>
                 <a href="#budget" class="nav-item px-3 py-2 rounded-md text-sm">經費預算</a>
                 <a href="#timeline" class="nav-item px-3 py-2 rounded-md text-sm">活動時程</a>
                 <a href="#files" class="nav-item px-3 py-2 rounded-md text-sm">相關檔案</a>
+                <a href="#sponsors" class="nav-item px-3 py-2 rounded-md text-sm">特別感謝</a>
                 <a href="#contact" class="nav-item px-3 py-2 rounded-md text-sm">聯絡我們</a>
             </div>
             <div class="lg:hidden">
@@ -146,17 +158,19 @@
             <a href="#overview" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">活動總覽</a>
             <a href="#details" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">活動詳情</a>
             <a href="#rules" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">賽事規則</a>
+            <a href="#videos" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">活動影片</a>
             <a href="#market" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">周邊市集</a>
             <a href="#schedule" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">活動流程</a>
             <a href="#sponsorship" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">贊助效益</a>
             <a href="#budget" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">經費預算</a>
             <a href="#timeline" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">活動時程</a>
             <a href="#files" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">相關檔案</a>
+            <a href="#sponsors" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">特別感謝</a>
             <a href="#contact" class="block nav-item px-4 py-3 text-sm hover:bg-gray-100">聯絡我們</a>
         </div>
     </nav>
 
-    <div class="container mx-auto px-4 sm:px-6 pt-24 pb-12">
+    <div class="container mx-auto px-4 sm:px-6 pt-24 pb-12 xl:max-w-screen-xl">
 
         <section id="overview" class="py-12 md:py-16">
             <div class="text-center mb-12">
@@ -173,13 +187,8 @@
                     <p class="mb-4 text-gray-700 leading-relaxed">本活動旨在透過創意坦克設計與實作競賽，激發學生的創新思維、工程應用與團隊合作能力。我們鼓勵參與者在設計與製作坦克的過程中，學習跨領域整合、問題解決，並強調安全駕駛與環保永續的理念。這不僅是一場充滿挑戰與樂趣的競技活動，更是培養未來工程人才的搖籃。</p>
                     <p class="text-gray-700 leading-relaxed">「最後裝甲：勝者為王」將為校園注入活力，提供學生展現創意與技術的舞台，並促進校內外交流。我們期待透過此活動，讓參與者在實踐中學習，在競爭中成長。</p>
                 </div>
-                <div class="rounded-lg shadow-xl bg-white/70 p-6 sm:p-8 flex items-center justify-center h-full min-h-[250px] md:min-h-[300px]">
-                    <svg class="w-2/3 h-auto text-d2691e" fill="currentColor" viewBox="0 0 64 40" xmlns="http://www.w3.org/2000/svg" aria-label="活動 Logo">
-                      <path d="M59.2,20H4.8C2.1,20,0,22.1,0,24.8v8.4C0,35.9,2.1,38,4.8,38h54.3c2.7,0,4.8-2.1,4.8-4.8v-8.4 C64,22.1,61.9,20,59.2,20z M8,34c-2.2,0-4-1.8-4-4s1.8-4,4-4s4,1.8,4,4S10.2,34,8,34z M20,34c-2.2,0-4-1.8-4-4s1.8-4,4-4 s4,1.8,4,4S22.2,34,20,34z M32,34c-2.2,0-4-1.8-4-4s1.8-4,4-4s4,1.8,4,4S34.2,34,32,34z M44,34c-2.2,0-4-1.8-4-4 s1.8-4,4-4s4,1.8,4,4S46.2,34,44,34z M56,34c-2.2,0-4-1.8-4-4s1.8-4,4-4s4,1.8,4,4S58.2,34,56,34z"/>
-                      <path fill="#8FBC8F" d="M48,12H16c-1.1,0-2-0.9-2-2V8c0-1.1,0.9-2,2-2h32c1.1,0,2,0.9,2,2v2C50,11.1,49.1,12,48,12z"/>
-                      <path d="M48,16H16v6h32V16z"/>
-                      <path d="M48,14h14v-2c0-1.1-0.9-2-2-2H48V14z"/>
-                    </svg>
+                <div class="rounded-lg shadow-xl overflow-hidden">
+                    <img src="https://i.ibb.co/yV1b2Yj/Gemini_Generated_Image_jazwtsjazwtsjazw.png" alt="活動照片" class="w-full h-auto object-cover">
                 </div>
             </div>
         </section>
@@ -256,6 +265,39 @@
         </section>
 
         <div class="my-12 md:my-16 border-t-2 border-dashed border-gray-300"></div>
+
+        <section id="videos" class="py-12 md:py-16">
+            <h2 class="text-2xl sm:text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9A2.25 2.25 0 0 0 13.5 5.25h-9a2.25 2.25 0 0 0-2.25 2.25v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
+                活動影片錦集
+            </h2>
+            <p class="mb-8 text-center text-gray-700 leading-relaxed">透過影片，快速感受活動的熱血氛圍！</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card p-4 rounded-lg">
+                    <video controls class="w-full rounded-lg" preload="metadata">
+                        <source src="坦克車建造縮時影片.mp4" type="video/mp4">
+                        您的瀏覽器不支援影片播放。
+                    </video>
+                    <h3 class="text-lg font-semibold text-center mt-3">坦克建造縮時</h3>
+                </div>
+                <div class="card p-4 rounded-lg">
+                    <video controls class="w-full rounded-lg" preload="metadata">
+                        <source src="坦克慢動作特寫影片.mp4" type="video/mp4">
+                        您的瀏覽器不支援影片播放。
+                    </video>
+                    <h3 class="text-lg font-semibold text-center mt-3">慢動作特寫</h3>
+                </div>
+                <div class="card p-4 rounded-lg">
+                    <video controls class="w-full rounded-lg" preload="metadata">
+                        <source src="影片已準備就緒！.mp4" type="video/mp4">
+                        您的瀏覽器不支援影片播放。
+                    </video>
+                    <h3 class="text-lg font-semibold text-center mt-3">精彩花絮</h3>
+                </div>
+            </div>
+        </section>
+
+        <div class="my-12 md:my-16 border-t-2 border-dashed border-gray-300"></div>
         
         <section id="market" class="py-12 md:py-16">
             <h2 class="text-2xl sm:text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">
@@ -325,7 +367,7 @@
 
         <section id="sponsorship" class="py-12 md:py-16">
             <h2 class="text-2xl sm:text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a2.25 2.25 0 0 1-2.25 2.25H5.25a2.25 2.25 0 0 1-2.25-2.25v-8.25a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 11.25Zm-18 0h18M12 15.75h.008v.008H12v-.008Z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a2.25 2.25 0 0 1-2.25 2.25H5.25a2.25 2.25 0 0 1-2.25-2.25v-8.25a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 11.25Zm-18 0h18M12 15.75h.008v.008H12v-.008Z" /></svg>
                 贊助效益與價值
             </h2>
             <p class="mb-8 text-center text-gray-700 leading-relaxed">您的贊助將為活動注入關鍵動力，並為貴公司帶來多方面效益。<br class="hidden sm:block">我們誠摯邀請您成為合作夥伴，共同支持學生的創新與實踐精神。</p>
@@ -361,7 +403,7 @@
 
         <section id="budget" class="py-12 md:py-16 bg-white rounded-lg shadow-lg p-6 sm:p-8">
             <h2 class="text-2xl sm:text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" /></svg>
                 經費預算概覽
             </h2>
             <p class="mb-8 text-center text-gray-700 leading-relaxed">本活動總預算約為新台幣 520,000 元。您的支持對於活動的順利舉行至關重要。<br class="hidden sm:block">以下為主要經費項目佔比圖，詳細經費規劃請參考完整企劃書。</p>
@@ -391,18 +433,53 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6.226c0-1.232.996-2.226 2.226-2.226h11.054c1.23 0 2.226.994 2.226 2.226v3.55M16.5 18h-9a2.25 2.25 0 0 0-2.25 2.25v.894m7.5-12.894-2.25-2.25m0 0a2.25 2.25 0 0 1 3.182 0l2.25 2.25m-5.432 2.25 2.25-2.25m2.25 2.25-2.25-2.25m0 0 .227.227.227-.227m0 0-.227.227-.227-.227" /></svg>
                 相關檔案下載
             </h2>
-            <p class="mb-8 text-center text-gray-700 leading-relaxed">需要更多詳細資訊嗎？您可以在此處下載我們的完整企劃書或觀看活動宣傳影片。</p>
-            <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <div class="card p-6 rounded-lg text-center">
-                    <h3 class="text-xl font-semibold text-d2691e mb-2">完整企劃書</h3>
-                    <p class="text-gray-700 text-sm mb-4">深入了解活動的每一個細節、目標與價值。</p>
-                    <a href="#" class="btn-primary font-medium py-2 px-6 rounded-lg inline-block">下載 PDF</a>
+            <p class="mb-8 text-center text-gray-700 leading-relaxed">需要更多詳細資訊嗎？您可以在此處下載所有活動相關文件。</p>
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                        <span class="font-medium text-gray-800">最後裝甲 勝者為王 企劃書.pdf</span>
+                        <a href="最後裝甲 勝者為王企劃書 .pdf" download class="btn-primary font-medium py-1 px-4 rounded-lg text-sm">下載</a>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                        <span class="font-medium text-gray-800">坦克車 公告注意事項.pdf</span>
+                        <a href="坦克車 公告注意事項.pdf" download class="btn-primary font-medium py-1 px-4 rounded-lg text-sm">下載</a>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                        <span class="font-medium text-gray-800">坦克車團抗切結書.pdf</span>
+                        <a href="坦克車團抗切結書.pdf" download class="btn-primary font-medium py-1 px-4 rounded-lg text-sm">下載</a>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                        <span class="font-medium text-gray-800">坦克車輛贊助金切結書.pdf</span>
+                        <a href="坦克車輛贊助金切結書.pdf" download class="btn-primary font-medium py-1 px-4 rounded-lg text-sm">下載</a>
+                    </div>
                 </div>
-                <div class="card p-6 rounded-lg text-center">
-                    <h3 class="text-xl font-semibold text-d2691e mb-2">活動宣傳影片</h3>
-                    <p class="text-gray-700 text-sm mb-4">透過精彩影片，快速感受活動的熱血氛圍！</p>
-                    <a href="#" class="btn-primary font-medium py-2 px-6 rounded-lg inline-block">觀看影片</a>
-                </div>
+            </div>
+        </section>
+
+        <div class="my-12 md:my-16 border-t-2 border-dashed border-gray-300"></div>
+        
+        <section id="sponsors" class="py-12 md:py-16">
+            <h2 class="text-2xl sm:text-3xl font-bold section-title inline-block px-4 pb-2 mb-8">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+                特別感謝
+            </h2>
+            <p class="mb-8 text-center text-gray-700 leading-relaxed">感謝以下所有贊助商的大力支持，讓本次活動得以順利舉行。</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
+                <a href="#" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                    <img src="https://placehold.co/200x100/f0f0f0/cccccc?text=Sponsor+A" alt="贊助商 A" class="w-full h-auto object-contain">
+                </a>
+                <a href="#" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                    <img src="https://placehold.co/200x100/f0f0f0/cccccc?text=Sponsor+B" alt="贊助商 B" class="w-full h-auto object-contain">
+                </a>
+                <a href="#" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                    <img src="https://placehold.co/200x100/f0f0f0/cccccc?text=Sponsor+C" alt="贊助商 C" class="w-full h-auto object-contain">
+                </a>
+                <a href="#" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                    <img src="https://placehold.co/200x100/f0f0f0/cccccc?text=Sponsor+D" alt="贊助商 D" class="w-full h-auto object-contain">
+                </a>
+                <a href="#" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
+                    <img src="https://placehold.co/200x100/f0f0f0/cccccc?text=Sponsor+E" alt="贊助商 E" class="w-full h-auto object-contain">
+                </a>
             </div>
         </section>
 
@@ -440,95 +517,87 @@
     </footer>
 
     <script>
-        // --- Standard Page Interactivity ---
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                // Close mobile menu when a link is clicked
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const offsetTop = targetElement.offsetTop - 70; // Adjusted offset for fixed nav
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Active nav on scroll
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav a.nav-item');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 90) { 
-                    current = section.getAttribute('id');
-                }
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Standard Page Interactivity ---
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('nav-active');
-                 const linkHref = link.getAttribute('href');
-                if (linkHref && linkHref.includes(current) && current) {
-                    link.classList.add('nav-active');
-                }
-            });
-        });
-
-
-        // Tab functionality for rules
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const ruleContents = document.querySelectorAll('.rule-content');
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const tab = button.dataset.tab;
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                ruleContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === `${tab}-rules`) {
-                        content.classList.add('active');
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 70;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
                     }
                 });
             });
+            
+            // Active nav on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a.nav-item');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= sectionTop - 90) { 
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-active');
+                    const linkHref = link.getAttribute('href');
+                    if (linkHref && linkHref.includes(current) && current) {
+                        link.classList.add('nav-active');
+                    }
+                });
+            });
+
+            // Tab functionality for rules
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const ruleContents = document.querySelectorAll('.rule-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tab = button.dataset.tab;
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    ruleContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tab}-rules`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // --- Chart.js Visualizations ---
+            if (typeof Chart !== 'undefined') {
+                // Budget Chart
+                const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+                new Chart(budgetCtx, { type: 'pie', data: { labels: ['場地與設施', '器材租借', '獎項與補助', '印刷與文宣', '餐飲與保險', '人事費用', '雜支與其他'], datasets: [{ label: '經費比例', data: [96300, 20500, 47000, 72500, 60400, 84160, 140200], backgroundColor: ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF'], borderColor: '#FFF7F0', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#4A4A4A', font: { size: 10 }}}, title: { display: true, text: '主要經費項目佔比', color: '#D2691E', font: { size: 16 }}, tooltip: { callbacks: { label: function(context) { let label = context.label || ''; if (label) { label += ': '; } if (context.parsed !== null) { const total = context.dataset.data.reduce((a, b) => a + b, 0); const percentage = ((context.raw / total) * 100).toFixed(1) + '%'; label += percentage + ' (NT$' + context.raw.toLocaleString() + ')'; } return label; }}}} } });
+
+                // Gantt Chart
+                const ganttCtx = document.getElementById('ganttChart').getContext('2d');
+                new Chart(ganttCtx, { type: 'bar', data: { labels: ['制定規則與安全措施', '籌備計畫成立', '贊助洽談', '宣傳計畫、報名推廣', '場地確定與器材租借', '車輛設計規劃', '隊伍企劃篩選、修正', '車輛製作與初步測試', '試車與最終檢測', '安全設備檢查', '活動執行'], datasets: [{ label: '策劃與籌備', data: [{x: [new Date('2025-04-01').getTime(), new Date('2025-05-15').getTime()], y: '制定規則與安全措施'},{x: [new Date('2025-04-15').getTime(), new Date('2025-05-20').getTime()], y: '籌備計畫成立'},{x: [new Date('2025-05-01').getTime(), new Date('2025-09-30').getTime()], y: '贊助洽談'},{x: [new Date('2025-05-15').getTime(), new Date('2025-09-15').getTime()], y: '宣傳計畫、報名推廣'},], backgroundColor: '#FFADAD'}, { label: '場地與器材', data: [{x: [new Date('2025-06-01').getTime(), new Date('2025-07-15').getTime()], y: '場地確定與器材租借'},], backgroundColor: '#FFD6A5'}, { label: '設計與製作', data: [{x: [new Date('2025-06-10').getTime(), new Date('2025-07-01').getTime()], y: '車輛設計規劃'},{x: [new Date('2025-06-20').getTime(), new Date('2025-07-10').getTime()], y: '隊伍企劃篩選、修正'},{x: [new Date('2025-07-01').getTime(), new Date('2025-10-01').getTime()], y: '車輛製作與初步測試'},], backgroundColor: '#CAFFBF'}, { label: '演練與安全', data: [{x: [new Date('2025-09-15').getTime(), new Date('2025-10-15').getTime()], y: '試車與最終檢測'},{x: [new Date('2025-10-01').getTime(), new Date('2025-10-20').getTime()], y: '安全設備檢查'},], backgroundColor: '#9BF6FF'}, { label: '活動執行', data: [{x: [new Date('2025-10-25').getTime(), new Date('2025-11-09').getTime()], y: '活動執行'},], backgroundColor: '#A0C4FF'}] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: { x: { type: 'time', time: { unit: 'month', tooltipFormat: 'yyyy MMM dd', displayFormats: { month: 'yyyy MMM' }}, min: new Date('2025-03-15').getTime(), max: new Date('2025-12-15').getTime(), ticks: { color: '#4A4A4A', font: {size: 10}}, grid: { color: '#E0E0E0' }}, y: { ticks: { color: '#4A4A4A', font: {size: 10}}, grid: { display: false }}}, plugins: { legend: { position: 'bottom', labels: { color: '#4A4A4A', font: { size: 10 }}}, title: { display: true, text: '活動籌備甘特圖 (示意)', color: '#D2691E', font: { size: 16 }}, tooltip: { callbacks: { label: function(context) { const item = context.dataset.data[context.dataIndex]; const startDate = new Date(item.x[0]).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric' }); const endDate = new Date(item.x[1]).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric' }); return `${context.dataset.label}: ${startDate} - ${endDate}`; }}}}} });
+            } else {
+                console.error('Chart.js is not loaded');
+            }
         });
-        
-        // --- Chart.js Visualizations ---
-        // Budget Chart
-        const budgetData = {
-            labels: ['場地與設施', '器材租借', '獎項與補助', '印刷與文宣', '餐飲與保險', '人事費用', '雜支與其他'],
-            datasets: [{
-                label: '經費比例',
-                data: [96300, 20500, 47000, 72500, 60400, 84160, 140200], 
-                backgroundColor: ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF'],
-                borderColor: '#FFF7F0',
-                borderWidth: 2
-            }]
-        };
-        const budgetConfig = { type: 'pie', data: budgetData, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#4A4A4A', font: { size: 10 }}}, title: { display: true, text: '主要經費項目佔比', color: '#D2691E', font: { size: 16 }}, tooltip: { callbacks: { label: function(context) { let label = context.label || ''; if (label) { label += ': '; } if (context.parsed !== null) { const total = context.dataset.data.reduce((a, b) => a + b, 0); const percentage = ((context.raw / total) * 100).toFixed(1) + '%'; label += percentage + ' (NT$' + context.raw.toLocaleString() + ')'; } return label; }}}} }};
-        new Chart(document.getElementById('budgetChart'), budgetConfig);
-
-        // Gantt Chart
-        const ganttData = { labels: ['制定規則與安全措施', '籌備計畫成立', '贊助洽談', '宣傳計畫、報名推廣', '場地確定與器材租借', '車輛設計規劃', '隊伍企劃篩選、修正', '車輛製作與初步測試', '試車與最終檢測', '安全設備檢查', '活動執行'], datasets: [{ label: '策劃與籌備', data: [{x: [new Date('2025-04-01').getTime(), new Date('2025-05-15').getTime()], y: '制定規則與安全措施'},{x: [new Date('2025-04-15').getTime(), new Date('2025-05-20').getTime()], y: '籌備計畫成立'},{x: [new Date('2025-05-01').getTime(), new Date('2025-09-30').getTime()], y: '贊助洽談'},{x: [new Date('2025-05-15').getTime(), new Date('2025-09-15').getTime()], y: '宣傳計畫、報名推廣'},], backgroundColor: '#FFADAD'}, { label: '場地與器材', data: [{x: [new Date('2025-06-01').getTime(), new Date('2025-07-15').getTime()], y: '場地確定與器材租借'},], backgroundColor: '#FFD6A5'}, { label: '設計與製作', data: [{x: [new Date('2025-06-10').getTime(), new Date('2025-07-01').getTime()], y: '車輛設計規劃'},{x: [new Date('2025-06-20').getTime(), new Date('2025-07-10').getTime()], y: '隊伍企劃篩選、修正'},{x: [new Date('2025-07-01').getTime(), new Date('2025-10-01').getTime()], y: '車輛製作與初步測試'},], backgroundColor: '#CAFFBF'}, { label: '演練與安全', data: [{x: [new Date('2025-09-15').getTime(), new Date('2025-10-15').getTime()], y: '試車與最終檢測'},{x: [new Date('2025-10-01').getTime(), new Date('2025-10-20').getTime()], y: '安全設備檢查'},], backgroundColor: '#9BF6FF'}, { label: '活動執行', data: [{x: [new Date('2025-10-25').getTime(), new Date('2025-11-09').getTime()], y: '活動執行'},], backgroundColor: '#A0C4FF'}]};
-        const ganttConfig = { type: 'bar', data: ganttData, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: { x: { type: 'time', time: { unit: 'month', tooltipFormat: 'yyyy MMM dd', displayFormats: { month: 'yyyy MMM' }}, min: new Date('2025-03-15').getTime(), max: new Date('2025-12-15').getTime(), ticks: { color: '#4A4A4A', font: {size: 10}}, grid: { color: '#E0E0E0' }}, y: { ticks: { color: '#4A4A4A', font: {size: 10}}, grid: { display: false }}}, plugins: { legend: { position: 'bottom', labels: { color: '#4A4A4A', font: { size: 10 }}}, title: { display: true, text: '活動籌備甘特圖 (示意)', color: '#D2691E', font: { size: 16 }}, tooltip: { callbacks: { label: function(context) { const item = context.dataset.data[context.dataIndex]; const startDate = new Date(item.x[0]).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric' }); const endDate = new Date(item.x[1]).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric' }); return `${context.dataset.label}: ${startDate} - ${endDate}`; }}}}}};
-        new Chart(document.getElementById('ganttChart'), ganttConfig);
-
     </script>
 </body>
 </html>
