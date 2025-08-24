@@ -510,7 +510,7 @@
                         <span>📍</span><span>活動地點 (彰師大寶山校區)</span>
                     </a>
                     <a href="tel:0974176747" class="btn-primary w-full text-center p-3 rounded-lg font-semibold text-lg flex items-center justify-center space-x-3">
-                        <span>📞</span><span>聯絡電話：0974-176-747</span>
+                        <span>📞</span><span>聯絡電話：0974176747</span>
                     </a>
                      <a href="https://www.facebook.com/profile.php?id=61574454154388&sk=photos" target="_blank" rel="noopener noreferrer" class="btn-primary w-full text-center p-3 rounded-lg font-semibold text-lg flex items-center justify-center space-x-3">
                         <span>💬</span><span>前往 FB 洽詢贊助</span>
@@ -533,6 +533,7 @@
     <footer class="bg-gray-800 text-white py-8 text-center">
         <p>&copy; 114年 (2025) 國立彰化師範大學 電機與機械科技學系 版權所有</p>
         <p class="text-sm mt-1">「最後裝甲：勝者為王」活動籌備團隊</p>
+        <p class="text-sm mt-2">點閱次數：<span id="view-counter">0000</span></p>
     </footer>
 
     <script>
@@ -640,6 +641,20 @@
                     hidePopup();
                 }
             });
+
+            // --- View Counter Logic ---
+            const counterElement = document.getElementById('view-counter');
+            if (counterElement) {
+                let count = localStorage.getItem('page_view_count');
+                if (count === null) {
+                    count = 1;
+                } else {
+                    count = parseInt(count) + 1;
+                }
+                localStorage.setItem('page_view_count', count);
+                // Pad with leading zeros to 4 digits
+                counterElement.textContent = count.toString().padStart(4, '0');
+            }
         });
     </script>
 </body>
